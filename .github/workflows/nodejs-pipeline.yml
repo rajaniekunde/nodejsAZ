@@ -29,9 +29,14 @@ jobs:
 
     # Build application (if necessary)tyty
     - name: Build application
-      run: npm start > /dev/null 2>&1 &
-           PID=$!
-           wait $PID || echo "Process failed with exit code $?"
+      run: |
+       
+        lsof -t -i:3000 | xargs kill -9 || echo "No process found on port 3000"
+
+    
+        npm start > /dev/null 2>&1 &
+        PID=$!
+        wait $PID || echo "Process failed with exit code $?"
 
     # Deploy application (if applicable)
     - name: Deploy to Azure
