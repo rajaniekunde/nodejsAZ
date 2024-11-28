@@ -29,14 +29,24 @@ jobs:
 
     # Build application (if necessary)tyty
     - name: Build application
-      run: |
+     run: |
        
         lsof -t -i:3000 | xargs kill -9 || echo "No process found on port 3000"
 
     
         npm start > /dev/null 2>&1 &
         PID=$!
-        wait $PID || echo "Process failed with exit code $?"
+        
+    
+        sleep 5
+        
+        # Check if the application is running (assuming it listens on port 3000)
+        if lsof -i:3000; then
+          echo "Application is running on port 3000."
+        else
+          echo "Application failed to start on port 3000."
+          exit 1  # Exit with an error if the application is not running
+        fi
 
     # Deploy application (if applicable)
     - name: Deploy to Azure
