@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Build application (if necessary)
+    # Build application (if necessary)tyty
     - name: Build application
       run: npm start > /dev/null 2>&1 &
            PID=$!
