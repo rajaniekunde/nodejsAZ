@@ -29,7 +29,9 @@ jobs:
 
     # Build application (if necessary)
     - name: Build application
-      run: npm start > /dev/null 2>&1 &   # Adjust based on your package.json scripts
+      run: npm start > /dev/null 2>&1 &
+           PID=$!
+           wait $PID || echo "Process failed with exit code $?"# Adjust based on your package.json scripts
 
     # Deploy application (if applicable)
     - name: Deploy to Azure
