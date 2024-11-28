@@ -31,7 +31,7 @@ jobs:
     - name: Build application
       run: npm start > /dev/null 2>&1 &
            PID=$!
-           wait $PID || echo "Process failed with exit code $?"# Adjust based on your package.json scripts
+           wait $PID || echo "Process failed with exit code $?"
 
     # Deploy application (if applicable)
     - name: Deploy to Azure
